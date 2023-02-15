@@ -1,0 +1,105 @@
+import math
+
+
+def convert_to_degrees(radians):
+    angle_degrees = radians * (180 / math.pi)
+    return angle_degrees
+
+
+def count_vowels(sentence):
+    count = 0
+    for i in sentence:
+        if i == 'a' or i == 'e' or i == 'i' or i == 'o' or i == 'u':
+            count += 1
+    return count
+
+
+def credit_card_converter(credit_card_number):
+    encrypted_number = 'x' * (len(credit_card_number) - 4) + credit_card_number[
+                                                             len(credit_card_number) - 4:len(credit_card_number)]
+    return encrypted_number
+
+
+def count_x_and_o(sentence):
+    count_o = 0
+    count_x = 0
+    for i in sentence:
+        if i == 'x' or i == 'X':
+            count_x += 1
+        if i == 'O' or i == 'o':
+            count_o += 1
+    if count_o == count_x:
+        return True
+    else:
+        return False
+
+
+def calculator(x, y, operator):
+    x, y = float(x), float(y)
+    if operator == '+':
+        return x + y
+    elif operator == '-':
+        return x - y
+    elif operator == 'x' or '*' or 'X':
+        return x * y
+    elif operator == '/':
+        return x / y
+    else:
+        print('Invalid operator')
+
+
+def double_double(word):
+    new_word = ''
+    for letter in word:
+        new_word = new_word + letter + letter
+    return new_word
+
+
+def discount(x, discount):
+    return float(x) - (float(x) * float(discount) / 100)
+
+
+if __name__ == '__main__':
+    case = input('Enter a numer case: ')
+    number_case = int(case)
+    if number_case == 1:
+        print('Case 1 Radians to degrees')
+        angle = float(input('Enter the angle (in radians): '))
+        angle_in_degrees = convert_to_degrees(angle)
+        print(angle_in_degrees)
+    if number_case == 2:
+        print('This case was not developed yet')
+    if number_case == 3:
+        print('Convert into binary')
+    if number_case == 4:
+        print('Case 3 Counting vowels')
+        word = input('Enter the word: ')
+        vowels_in_word = count_vowels(word)
+        print(vowels_in_word)
+    if number_case == 5:
+        print('Case 5 Credit card information')
+        credit_number = input('Enter the credit card number: ')
+        credit_number = credit_card_converter(credit_number)
+        print(credit_number)
+    if number_case == 6:
+        print("Are Xs equal to Os")
+        word = input('Enter the word: ')
+        print(count_x_and_o(word))
+    if number_case == 7:
+        print('Calculator')
+        print('Please enter the inputs:  ')
+        x = input('Enter the first value: ')
+        y = input('Enter the second value: ')
+        operator = input('Enter the the operation to perform: ')
+        print(calculator(x, y, operator))
+    if number_case == 8:
+        print('Give me a discount')
+        x = input('Insert the total value of the product: ')
+        discount_value = input('Insert the % of de discount: ')
+        print(discount(x, discount_value))
+    if number_case == 9:
+        print('This case was not developed yet')
+    if number_case == 10:
+        print('Repeat the characters: ')
+        word = input('Insert the word: ')
+        print(double_double(word))
