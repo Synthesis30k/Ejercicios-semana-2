@@ -1,0 +1,71 @@
+# Script que define el área para un circulo, un rombo , un trapecio y triangulo
+# Fecha :18-02-2023 
+# Version 2
+# Kernel :python 3.11
+
+def main():
+    operando = True
+    while operando == True:
+        print('Bienvenido a la calculadora de areas ')
+        print('Calcular el area de: \n 1. Triangulo \n 2. Circulo \n 3. Rombo \n 4. Trapecio\n 5. Salir\n')
+        command = input('Por favor ingrese una opción: ')
+        match command:
+            case '1':
+                print('Area del triangulo  \'b*a/2\'')
+                print('En caso de ingresar decimales, por favor ingresarlos con \'.\'')
+                base = float(input('Ingrese la base del triangulo (b) :'))
+                altura = float(input('Ingrese la altura del triangulo (a) :'))
+                if base <= 0  or altura <= 0:
+                    print('Operación incorrecta')
+                else:        
+                    area = base * altura /2
+                    print ('El área del triangulo es igual a: ' + str('{0:.3f}'.format(area))+ ' Unidades cuadradas')
+                    continuar = input('¿Desea continuar?: y/n \n')
+                    if continuar == 'n' or continuar =='N':
+                            operando = False         
+            case '2':
+                print('Area del Circulo  \'r*r*PI\'')
+                print('En caso de ingresar decimales, por favor ingresarlos con \'.\'')
+                radio = float(input('Ingrese el radio del circulo (r) : '))
+                if radio <= 0:
+                    print('Operación incorrecta')
+                else:
+                    area = radio**2 * 3.1416
+                    print ('El área del circulo es igual a: ' + str('{0:.3f}'.format(area)) + ' Unidades cuadradas')
+                    continuar = input('¿Desea continuar?: y/n \n')
+                    if continuar == 'n' or continuar =='N':
+                        operando = False   
+            case '3':
+                print ('Area del rombo  \'D*d/2\'')
+                print('En caso de ingresar decimales, por favor ingresarlos con \'.\'')
+                diagonal_mayor = float(input('Ingrese diagonal mayor del rombo (D) :'))
+                diagonal_menor = float(input('Ingrese la diagonal menor del rombo (d) :'))
+                if diagonal_mayor <= 0  or diagonal_menor <= 0:
+                    print('Operación incorrecta')
+                else:
+                    area = diagonal_mayor * diagonal_menor/2
+                    print ('El área del rombo es igual a: ' + str('{0:.3f}'.format(area))+ ' Unidades cuadradas')
+                    continuar = input('¿Desea continuar?: y/n \n')
+                    if continuar == 'n' or continuar =='N':
+                        operando = False  
+            case '4':
+                print('Area del trapecio  \'(B+b)*a/2\'')
+                print('En caso de ingresar decimales, por favor ingresarlos con \'.\'')
+                base_mayor = float(input('Ingrese la base mayor del trapecio (B) : '))
+                base_menor = float(input('Ingrese la base menor del trapecio (b): '))
+                altura = float(input('Ingrese la altura del trapecio (a) : '))
+                if base_mayor <= 0 or base_menor <= 0 or altura <= 0:
+                    print('Operación incorrecta')
+                else:    
+                    area = (base_mayor + base_menor)/2 *altura
+                    print ('El área del trapecio es igual a: ' + str('{0:.3f}'.format(area))+ ' Unidades cuadradas')
+                    continuar = input('¿Desea continuar?: y/n \n')
+                    if continuar == 'n' or continuar =='N':
+                        operando = False   
+            case '5':
+                operando = False
+            case other:
+                print('Opción invalida')
+                
+
+main()
