@@ -1,0 +1,227 @@
+import math
+
+
+# Camilo Rojas
+# Week 2 Exercises
+# 21-02-2021
+# Ver: 2.0
+# Python Kernel: 3.10
+
+# Main del script donde se ejecuta toda la solución para los problemas del 1 al 10 (Salvo 2,3 y 9)
+
+def main():
+    # Booleano para mantener el "while" en funcionamiento
+    running = True
+    # Se crea un set para validar los datos numéricos junto con el caracter '.'
+    valid_numbers = set(str(i) for i in range(10))
+    valid_numbers.add('.')
+    while running:
+        print(' \nPrograms week 3:\n ')
+        print(' 1. Radians to degrees \n 3. Counting vowels \n 4. Counting vowels \n 5. Credit card encrypter \n 6. '
+              'Are '
+              '\'X\'s equal to \'O\'s\n 7. Calculator\n 8. Give me a discount\n 10. Double the characters \n 0. Exit\n')
+        number_case = input('Please enter a numer case: ')
+        match number_case:
+            case '1':
+                print('Case 1 Radians to degrees')
+                angle = input('Enter the angle (in radians): ')
+                for i in angle:
+                    if i in valid_numbers:
+                        operate = True
+                    else:
+                        operate = False
+                    if operate:
+                        angle = float(angle)
+                        angle_in_degrees = convert_to_degrees(angle)
+                        print(str(angle_in_degrees) + 'Degrees')
+                        keep_running = input('Do you wish to continue?: y/n ')
+                        if keep_running == 'n' or keep_running == 'N':
+                            break
+                else:
+                    print('Non numeric value entered, invalid operation')
+
+            case '2':
+                print('This case was not developed yet')
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '3':
+                print('This case was not developed yet')
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '4':
+                print('Case 4 Counting vowels')
+                word = input('Enter the word: ')
+                vowels_in_word = count_vowels(word)
+                print('There is ' + str(vowels_in_word) + ' vowels in the word')
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '5':
+                print('Case 5 Credit card encrypter')
+                credit_number = input('Enter the credit card number: ')
+                credit_number = credit_number.replace(' ', '')
+                if credit_number.isnumeric() and len(credit_number) == 16:
+                    credit_number = credit_card_converter(credit_number)
+                    print(credit_number)
+                    keep_running = input('Do you wish to continue?: y/n ')
+                    if keep_running == 'n' or keep_running == 'N':
+                        break
+                else:
+                    print('Non numeric value or incorrect number, invalid operation')
+
+            case '6':
+                print("Case 6 Are \'X\'s equal to \'O\'s")
+                word = input('Enter the word: ')
+                if count_x_and_o(word):
+                    print('The number od \'x\'s and \'o\'s in the word are the same')
+                else:
+                    print('The number od \'x\'s and \'o\'s in the word are not the same')
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '7':
+                print('case 7 Calculator')
+                print('Please enter the inputs:  ')
+                x = input('Enter the first value: ')
+                for i in x:
+                    if i in valid_numbers:
+                        operate = True
+                    else:
+                        operate = False
+                if operate:
+                    y = input('Enter the second value: ')
+                    for j in y:
+                        if j in valid_numbers:
+                            operate = True
+                        else:
+                            operate = False
+                if operate:
+                    operator = input('Please enter the operation to do: \n 1. \'+ \' \n 2. \'- \'\n 3. \'* \' \n 4. '
+                                     '\'/\'\n')
+                    print('Your result: ' + str(calculator(x, y, operator)))
+                    keep_running = input('Do you wish to continue?: y/n ')
+                    if keep_running == 'n' or keep_running == 'N':
+                        break
+                if not operate:
+                    print('\nInvalid entries\n')
+
+            case '8':
+                print(' Case 8 Give me a discount')
+                x = input('Insert the total value of the product: ')
+                for i in x:
+                    if i in valid_numbers:
+                        operate = True
+                    else:
+                        operate = False
+                if operate:
+                    discount_value = input('Insert the % of de discount: ')
+                    for j in discount_value:
+                        if j in valid_numbers:
+                            operate = True
+                        else:
+                            operate = False
+                if operate:
+                    print('Your new price now is: ' + str(discount(x, discount_value)))
+                    keep_running = input('Do you wish to continue?: y/n ')
+                    if keep_running == 'n' or keep_running == 'N':
+                        break
+                if not operate:
+                    print('\nInvalid entries\n')
+            case '9':
+                print('This case was not developed yet')
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '10':
+                print('Case 10 Repeat the characters: ')
+                word = input('Insert the word: ')
+                print(double_double(word))
+                keep_running = input('Do you wish to continue?: y/n ')
+                if keep_running == 'n' or keep_running == 'N':
+                    break
+            case '0':
+                running = False
+            case other:
+                print('Invalid operation')
+
+
+# Respuesta al punto 1. Función que permite pasar de grados a radianes
+def convert_to_degrees(radians):
+    angle_degrees = radians * (180 / math.pi)
+    return angle_degrees
+
+
+# Respuesta al punto 4. Función que cuenta las vocales en un string dado
+def count_vowels(sentence):
+    count = 0
+    for i in sentence:
+        if i == 'a' or i == 'e' or i == 'i' or i == 'o' or i == 'u':
+            count += 1
+        elif i == 'A' or i == 'E' or i == 'I' or i == 'O' or i == 'U':
+            count += 1
+    return count
+
+
+# Respuesta al punto 5. Función que permite convertir los números de una tarjeta de crédito en '*' salvo los últimos 4
+def credit_card_converter(credit_card_number):
+    encrypted_number = 'x' * (len(credit_card_number) - 4) + credit_card_number[
+                                                             len(credit_card_number) - 4:len(credit_card_number)]
+    return encrypted_number
+
+
+# Respuesta al punto 6 . Función que cuenta el número de 'x' y 'o' en una oración
+def count_x_and_o(sentence):
+    count_o = 0
+    count_x = 0
+    for i in sentence:
+        if i == 'x' or i == 'X':
+            count_x += 1
+        if i == 'O' or i == 'o':
+            count_o += 1
+    if count_o == count_x:
+        return True
+    else:
+        return False
+
+
+# Respuesta al punto 7. Función que crea una calculadora con operaciones básicas
+def calculator(x, y, operator):
+    x, y = float(x), float(y)
+
+    match operator:
+        case '1':
+            result = x + y
+            return result
+        case '2':
+            result = x - y
+            return result
+        case '3':
+            result = x * y
+            return result
+        case '4':
+            if y == 0:
+                return 'Cannot be divided by 0'
+            else:
+                result = x / y
+                return result
+        case other:
+            print('Invalid operator')
+
+
+# Respuesta al punto 8. Función que a partir de un precio inicial devuelve uno con un descuento
+def discount(x, disc):
+    result = float(x) - (float(x) * float(disc) / 100)
+    return result
+
+
+# Respuesta al punto 10. Función que dobla las letras de una palabra inicial dada
+def double_double(word):
+    new_word = ''
+    for letter in word:
+        new_word = new_word + letter + letter
+    return new_word
+
+
+main()
