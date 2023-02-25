@@ -44,6 +44,15 @@ def transform_hexadecimal(result):
     return result
 
 
+def transform_from_hexadecimal(result):
+    hex_val = {'A': '10', 'B': '11', 'C': '12', 'D': '13', 'E': '14', 'F': '15', 'a': '10', 'b': '11', 'c': '12',
+               'd': '13', 'e': '14', 'f': '15'}
+    result = str(result)
+    for i, j in hex_val.items():
+        result = result.replace(i, j)
+    return result
+
+
 def main():
     # Booleano para mantener el "while" en funcionamiento
     running = True
@@ -113,20 +122,24 @@ def main():
             case '4':
                 number = input('Please insert the number in hexadecimal: ')
                 # Se crea un SET para validar los datos ingresados
-                octal_set = {str(i) for i in range(10)}
+                hex_set = {str(i) for i in range(10)}
+                letters = {'A', 'B', 'C', 'D', 'E', 'F'}
+                hex_set.update(letters)
                 valid = True
                 for num in number:
-                    if num in octal_set:
+                    if num in hex_set:
                         valid = True
                     else:
                         valid = False
                 if valid and len(number) <= 8:
                     # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
-                    results = to_decimal(int(number), 16)
+                    result_t = transform_from_hexadecimal(number)
+                    print(result_t)
+                    results = to_decimal(int(result_t), 16)
                     print('You\'r hexadecimal in decimal is: ' + str(results))
                     result_b = decimal_to_all(results, 2)
                     print('You\'r hexadecimal in binary is: ' + str(result_b))
-                    result_h = decimal_to_all(results, 16)
+                    result_h = decimal_to_all(results, 8)
                     print('You\'r hexadecimal in octal is: ' + str(result_h))
                 else:
                     print('Invalid operation')
