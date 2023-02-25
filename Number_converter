@@ -1,0 +1,139 @@
+# Camilo Rojas
+# Convertidor de números
+# 23-02-2021
+# Ver: 1.0
+# Python Kernel: 3.10
+
+# Función que convierte un decimal a binario, hexadecimal y octal, se toma el residuo de cada division y se añade a una
+# lista mientras se divide el número original, al final se entra el resultado como un entero mediante un casting
+
+def decimal_to_all(dec, base):
+    # Contador en caso de que de la base sea mayor al número ingresado, para no invertir el resultado de una sola
+    # operación
+    count = 0
+    converted_number = ''
+    # Parte de la función que pasa el número decimal a sus otras bases
+    while dec > 0:
+        res = dec % base
+        dec = dec // base
+        converted_number += str(res)
+        count += 1
+    if count > 1:
+        converted_number = converted_number[::-1]
+    converted_number = int(converted_number)
+    return converted_number
+
+
+# Función que pasa de cualquier base a decimal
+def to_decimal(num, base):
+    length = len(str(num)) - 1
+    decimal = 0
+    for i in (str(num)):
+        i = int(i) * (base ** length)
+        length -= 1
+        decimal = decimal + i
+    return decimal
+
+
+# Función que cambia los valores para los números hexadecimales
+def transform_hexadecimal(result):
+    hex_val = {'10': 'A', '11': 'B', '12': 'C', '13': 'D', '14': 'E', '15': 'F'}
+    result = str(result)
+    for i, j in hex_val.items():
+        result = result.replace(i, j)
+    return result
+
+
+def main():
+    # Booleano para mantener el "while" en funcionamiento
+    running = True
+    while running:
+        print('\n Welcome to the number converter:\n Please select the type of number you will enter next, '
+              'remember the length of '
+              'the number cannot pass 8 digits.')
+        print(' 1. Decimal  \n 2. Binary \n 3. Octal \n 4. Hexadecimal \n 0. Exit\n')
+        # Match para todas las formas de conversión
+        number_case = input('Please enter a numer case: ')
+        match number_case:
+            case '1':
+                number = input('Please insert the number in decimal (Only integers): ')
+                if number.isdecimal() and len(number) <= 8:
+                    result_b = decimal_to_all(int(number), 2)
+                    print('You\'r decimal in binary is: ' + str(result_b))
+                    result_h = decimal_to_all(int(number), 16)
+                    result_h = transform_hexadecimal(result_h)
+                    print('You\'r decimal in hexadecimal is: ' + str(result_h))
+                    result_o = decimal_to_all(int(number), 8)
+                    print('You\'r decimal in octal is: ' + str(result_o))
+
+                else:
+                    print('Invalid operation')
+            case '2':
+                number = input('Please insert the number in octal (Only integers): ')
+                # Se crea un SET para validar los datos ingresados
+                bi_set = {str(i) for i in range(2)}
+                valid = True
+                for num in number:
+                    if num in bi_set:
+                        valid = True
+                    else:
+                        valid = False
+                if valid and len(number) <= 8:
+                    # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
+                    results = to_decimal(int(number), 2)
+                    print('You\'r binary in decimal is: ' + str(results))
+                    result_o = decimal_to_all(results, 8)
+                    print('You\'r binary in octal is: ' + str(result_o))
+                    result_h = decimal_to_all(results, 16)
+                    result_h = transform_hexadecimal(result_h)
+                    print('You\'r binary in hexadecimal is: ' + str(result_h))
+                else:
+                    print('Invalid operation')
+            case '3':
+                number = input('Please insert the number in octal (Only integers): ')
+                # Se crea un SET para validar los datos ingresados
+                octal_set = {str(i) for i in range(8)}
+                valid = True
+                for num in number:
+                    if num in octal_set:
+                        valid = True
+                    else:
+                        valid = False
+                if valid and len(number) <= 8:
+                    # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
+                    results = to_decimal(int(number), 8)
+                    print('You\'r octal in decimal is: ' + str(results))
+                    result_b = decimal_to_all(results, 2)
+                    print('You\'r octal in binary is: ' + str(result_b))
+                    result_h = decimal_to_all(results, 16)
+                    result_h = transform_hexadecimal(result_h)
+                    print('You\'r octal in hexadecimal is: ' + str(result_h))
+                else:
+                    print('Invalid operation')
+            case '4':
+                number = input('Please insert the number in hexadecimal: ')
+                # Se crea un SET para validar los datos ingresados
+                octal_set = {str(i) for i in range(10)}
+                valid = True
+                for num in number:
+                    if num in octal_set:
+                        valid = True
+                    else:
+                        valid = False
+                if valid and len(number) <= 8:
+                    # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
+                    results = to_decimal(int(number), 16)
+                    print('You\'r hexadecimal in decimal is: ' + str(results))
+                    result_b = decimal_to_all(results, 2)
+                    print('You\'r hexadecimal in binary is: ' + str(result_b))
+                    result_h = decimal_to_all(results, 16)
+                    print('You\'r hexadecimal in octal is: ' + str(result_h))
+                else:
+                    print('Invalid operation')
+            case '0':
+                running = False
+            case other:
+                print('Invalid selection')
+
+
+main()
