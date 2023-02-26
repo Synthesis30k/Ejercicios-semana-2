@@ -1,7 +1,7 @@
 # Camilo Rojas
 # Convertidor de números
 # 23-02-2021
-# Ver: 1.0
+# Ver: 2.3
 # Python Kernel: 3.10
 
 # Función que convierte un decimal a binario, hexadecimal y octal, se toma el residuo de cada division y se añade a una
@@ -54,13 +54,23 @@ def to_decimal(num, base):
     return decimal
 
 
-def transform_from_hexadecimal(result):
+# Función que convierte un hexadecimal a su forma decimal
+def transform_from_hexadecimal_to_decimal(result):
     hex_val = {'A': '10', 'B': '11', 'C': '12', 'D': '13', 'E': '14', 'F': '15', 'a': '10', 'b': '11', 'c': '12',
                'd': '13', 'e': '14', 'f': '15'}
     result = str(result)
-    for i, j in hex_val.items():
-        result = result.replace(i, j)
-    return result
+    list_of_nums = []
+    length = len(result) - 1
+    decimal = 0
+    for char in result:
+        for i, j in hex_val.items():
+            char = char.replace(i, j)
+        list_of_nums.append(char)
+    for i in list_of_nums:
+        i = int(i) * (16 ** length)
+        length -= 1
+        decimal = decimal + i
+    return decimal
 
 
 def main():
@@ -140,9 +150,7 @@ def main():
                         valid = False
                 if valid and len(number) <= 8:
                     # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
-                    result_t = transform_from_hexadecimal(number)
-                    print(result_t)
-                    results = to_decimal(int(result_t), 16)
+                    results = transform_from_hexadecimal_to_decimal(number)
                     print('You\'r hexadecimal in decimal is: ' + str(results))
                     result_b = decimal_to_all(results, 2)
                     print('You\'r hexadecimal in binary is: ' + str(result_b))
