@@ -102,9 +102,7 @@ def main():
                 bi_set = {str(i) for i in range(2)}
                 valid = True
                 for num in number:
-                    if num in bi_set:
-                        valid = True
-                    else:
+                    if num not in bi_set:
                         valid = False
                 if valid and len(number) <= 8:
                     # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
