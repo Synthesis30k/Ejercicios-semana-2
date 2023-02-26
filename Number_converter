@@ -122,9 +122,7 @@ def main():
                 octal_set = {str(i) for i in range(8)}
                 valid = True
                 for num in number:
-                    if num in octal_set:
-                        valid = True
-                    else:
+                    if num not in octal_set:
                         valid = False
                 if valid and len(number) <= 8:
                     # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
@@ -140,13 +138,11 @@ def main():
                 number = input('Please insert the number in hexadecimal: ')
                 # Se crea un SET para validar los datos ingresados
                 hex_set = {str(i) for i in range(10)}
-                letters = {'A', 'B', 'C', 'D', 'E', 'F'}
+                letters = {'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f'}
                 hex_set.update(letters)
                 valid = True
                 for num in number:
-                    if num in hex_set:
-                        valid = True
-                    else:
+                    if num not in hex_set:
                         valid = False
                 if valid and len(number) <= 8:
                     # Se convierte en decimal y luego de decimal se pasa a las dos bases restantes
